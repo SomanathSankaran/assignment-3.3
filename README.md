@@ -29,5 +29,17 @@ responsible  for changing nodes in case of failure
 RESOURCE MANAGER(master daemon-1 IN NUMBER)
 1.schedule task across node 
 resource manager get the job and then assign it to each node
+Yarn schedules the job using 3 scheduler
+1.FIFO(first in first out)
+2.capacity scheduler
+3.fair scheduler
+1.FIFO 
+The first job which comes to cluster get completed first but is rarely used as it may result in waiting of jobs
+2.capacity scheduler
+Here the resource are allocated in que.Say there are 2 jobs namely searching and manipulation.
+Since searching takes less time and is processed quickly But manipulating takes higher time so if manipulating task come first it will take a long time and unnecessarily it makes the searching to wait as per FIFO.So in capacity scheduler it divides the resources such that 70% is used for manipulating and 30% is used for searching so both will take place
+3.fair scheduler
+here the resourced among the resources proportionately so none of job waits.
+By default capacity scheduler is used.
 Node Manager(SLAVE DAEMON –MANY IN NUMBER) 
 it contains application master which is responsible for running multiple processes on a single data node and it also asks for resources from the resource manager if the particular node is overloaded and resource manager then reallocates the particular job.
